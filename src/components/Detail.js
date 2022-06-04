@@ -1,27 +1,46 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux';
+import { selectMovies } from '../features/movie/movieSlice';
 
 export default function Detail() {
+    const { id } = useParams();
+    console.log(id);
+    const movies = useSelector(selectMovies);
+
+
+
     return (
+
         <Container>
-            <Background>
-                <img src='images/login-background.jpg' />
-            </Background>
-            <AboutMovie>
-                <img src='images/viewers-marvel.png' />
-                <div>
-                    <button class='play'><img src='images/play-icon-black.png' />Play</button>
-                    <button class='trailer'><img src='images/play-icon-white.png' />Trailer</button>
-                    <button class='plus'>+</button>
-                    <button class='group'><img src='images/group-icon.png' /></button>
-                </div>
-                <Subtitle>2018 . 7m . Family, Fantasy, Kids, Animation</Subtitle>
-                <Description>
-                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas sunt nam qui laborum impedit
-                    minus amet ex alias, expedita aperiam magni. Dolorum molestiae voluptatibus culpa sed et iste eligendi
-                    minima!
-                </Description>
-            </AboutMovie>
+            {movies.map((movie) => {
+                if (movie.id === id) {
+                    return (
+                        <div key={movie.id}>
+                            <Background>
+                                <img src={movie.primaryImage.url} />
+                            </Background>
+                            <AboutMovie>
+                                <img src='/images/viewers-marvel.png' />
+                                <div>
+                                    <button className='play'><img src='/images/play-icon-black.png' /><span>PLAY</span></button>
+                                    <button className='trailer'><img src='/images/play-icon-white.png' /><span>Trailer</span></button>
+                                    <button className='plus'>+</button>
+                                    <button className='group'><img src='/images/group-icon.png' /></button>
+                                </div>
+                                <Subtitle>{movie.releaseDate ? movie.releaseDate.year : 2018}. 7m . Friend, Fantasy, Drama, Animation</Subtitle>
+                                <Description>
+                                    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas sunt nam qui laborum impedit
+                                    minus amet ex alias, expedita aperiam magni. Dolorum molestiae voluptatibus culpa sed et iste eligendi
+                                    minima!
+                                </Description>
+                            </AboutMovie>
+                        </div>
+                    )
+                }
+            })}
+
 
         </Container>
     )
@@ -40,33 +59,40 @@ const Background = styled.div`
     right: 0;
     bottom: 0;
     z-index: -1;
-    opacity: 0.8;
+    opacity: 0.5;
 
     img {
+        display: block;
+        margin: auto;
         width: 100%;
-        height: 100%;
+        height:100%;
         object-fit: cover;
+        overflow: hidden;
     }
 `
 
 const AboutMovie = styled.div`
-    padding-top: 20vh;
+    padding-top: 20px;
     padding-left: calc(3.5vw + 10px);
     display: flex;
     flex-direction: column;
     justify-content: start;
     align-items: start;
-    min-width: 60ch;
-    max-width: 80ch;
+    width: 100%;
+    max-width: 30vw;
+
+    @media (max-width: 760px) {
+        max-width: 100%;
+    }
 
     & > * + * {
         margin-top: 20px;
     }
 
     img {
-        width: 40%;
-        height: 35%;
-        object-fit: contain;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     div {
         display: flex;
@@ -87,6 +113,7 @@ const AboutMovie = styled.div`
             
             img {
                 height: 30%;
+                width: 30%;
                 object-fit: contain;
                 vertical-align: -8px;
                 &:hover {

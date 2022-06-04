@@ -1,37 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useSelector } from 'react-redux'
+import { selectMovies } from '../features/movie/movieSlice'
+import { Link } from 'react-router-dom'
 
 export default function Movies() {
-
+    const movies = useSelector(selectMovies);
+    console.log(movies)
     return (
         <Container>
             <h4>Recommended for  you</h4>
             <Content>
+                {movies.map((movie) => {
+                    return (
+                        <Wrap key={movie.id}>
+                            <Link to={`/detail/${movie.id}`}>
+                                <img src={movie.primaryImage ? movie.primaryImage.url : "./images/viewers-starwars.png"} />
+                            </Link>
 
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
-                <Wrap>
-                    <img src='/images/viewers-starwars.png' />
-                </Wrap>
+                        </Wrap>
+                    )
+                })}
             </Content>
         </Container>
     )
@@ -45,11 +34,13 @@ const Content = styled.div`
     padding: 20px 0;
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    grid-gap: 30px;
+    grid-gap: 50px;
     
 `
 
 const Wrap = styled.div`
+    width: 100%;
+    height: 100%;
     border: 4px solid rgba(249, 249, 249, 0.1);
     border-radius: 10px;
     overflow: hidden;
@@ -61,6 +52,7 @@ const Wrap = styled.div`
     img {
         width: 100%;
         object-fit: cover;
+        aspect-ratio: 4/5;
         
     }
 

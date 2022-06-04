@@ -1,16 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import ImageSlider from './ImageSlider'
 import Viewers from './Viewers'
 import Movies from './Movies'
-
-
+import { useDispatch } from 'react-redux'
+import { setMovies } from '../features/movie/movieSlice'
 
 
 
 export default function Home() {
+    const dispatch = useDispatch();
 
-
+    useEffect(() => {
+        fetch("https://data-imdb1.p.rapidapi.com/titles/search/title/friend?info=mini_info&limit=8&page=1&titleType=movie", {
+            "method": "GET",
+            "headers": {
+                "x-rapidapi-host": "data-imdb1.p.rapidapi.com",
+                "x-rapidapi-key": "39f6f11ac7mshdaa7e203095ffa5p12e0c7jsnfc94e7a93f3c"
+            }
+        })
+            .then(res => res.json())
+            .then(data => dispatch(setMovies(data.results)))
+    }, [])
 
     return (
         <Container>

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components'
 
 export default function Header() {
+    const [login, setLogin] = useState(true);
+
     return (
         <Nav>
             <Logo src='/images/logo.svg' />
@@ -31,9 +33,22 @@ export default function Header() {
                     <span>Series</span>
                 </a>
             </NavMenu>
-            <UserImg>
-                <img src="logo192.png" />
-            </UserImg>
+            {login ?
+                <UserImg onClick={() => {
+                    alert("You have been logged out");
+                    setLogin(!login)
+                }}>
+                    <img src="/images/mario-av.png" />
+                </UserImg> :
+
+                <LoginBtn onClick={() => {
+                    alert("You are now login as Mario");
+                    setLogin(!login)
+                }}>
+                    Login
+                </LoginBtn>
+            }
+
         </Nav>
     )
 }
@@ -56,6 +71,12 @@ const NavMenu = styled.div`
     display: flex;
     flex-grow: 1;       
     margin-left: 2rem;
+
+    @media (max-width: 896px) {
+        display: none;
+        overflow: hidden;
+    }
+
     & > * + * {
         margin-left: 1.5rem;
     }
@@ -97,8 +118,22 @@ const NavMenu = styled.div`
 
 const UserImg = styled.div`
     width: 48px;
+    margin-left: auto;
+    cursor: pointer;
+    
     & > img {
         width: 100%;
+        object-fit: cover;
+        border-radius: 50%;
     }
     
+`
+const LoginBtn = styled.button`
+    margin-left: auto;
+    border: 2px solid #e3feff;
+    color: white;
+    background-color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
 `

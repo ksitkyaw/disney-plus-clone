@@ -23,7 +23,7 @@ function App() {
             </>}>
           </Route>
 
-          <Route path='/detail' element={
+          <Route path='/detail/:id' element={
             <>
               <Header />
               <Detail />
