@@ -16,7 +16,7 @@ export default function Home() {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "data-imdb1.p.rapidapi.com",
-                "x-rapidapi-key": "39f6f11ac7mshdaa7e203095ffa5p12e0c7jsnfc94e7a93f3c"
+                "x-rapidapi-key": process.env.REACT_APP_APIKEY
             }
         })
             .then(res => res.json())
@@ -24,6 +24,7 @@ export default function Home() {
     }, [])
 
     return (
+        
         <Container>
             <ImageSlider />
             <Viewers />
