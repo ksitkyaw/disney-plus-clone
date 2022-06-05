@@ -6,10 +6,11 @@ export default function Header() {
 
     return (
         <Nav>
+            {/*the images won't work  because gh-pages deploy code has change the path if you include repo name in front of every path(like I did in the first one), it would work */}
             <Logo src='/images/logo.svg' />
             <NavMenu>
                 <a>
-                    <img src="images/home-icon.svg" alt="" />
+                    <img src="disney-plus-clone/images/home-icon.svg" alt="" />
                     <span>Home</span>
                 </a>
                 <a>
