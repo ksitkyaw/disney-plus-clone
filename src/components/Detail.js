@@ -22,12 +22,12 @@ export default function Detail() {
                                 <img src={movie.primaryImage.url} />
                             </Background>
                             <AboutMovie>
-                                <img src='/images/viewers-marvel.png' />
+                                <img src='../images/viewers-marvel.png' />
                                 <div>
-                                    <button className='play'><img src='/images/play-icon-black.png' /><span>PLAY</span></button>
-                                    <button className='trailer'><img src='/images/play-icon-white.png' /><span>Trailer</span></button>
+                                    <button className='play'><img src='../images/play-icon-black.png' /><span>PLAY</span></button>
+                                    <button className='trailer'><img src='../images/play-icon-white.png' /><span>Trailer</span></button>
                                     <button className='plus'>+</button>
-                                    <button className='group'><img src='/images/group-icon.png' /></button>
+                                    <button className='group'><img src='../images/group-icon.png' /></button>
                                 </div>
                                 <Subtitle>{movie.releaseDate ? movie.releaseDate.year : 2018}. 7m . Friend, Fantasy, Drama, Animation</Subtitle>
                                 <Description>

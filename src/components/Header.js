@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom';
 
 export default function Header() {
     const [login, setLogin] = useState(true);
+    const navigate = useNavigate();
 
     return (
         <Nav>
-            {/*the images won't work  because gh-pages deploy code has change the path if you include repo name in front of every path(like I did in the first one), it would work */}
-            <Logo src='/images/logo.svg' />
+            {/*The src urls in the code is for the version that works for local serve, netlify. the comment says how the code should look like in gh-pages deploy */}
+            {/*the images won't work  because gh-pages deploy code has change the path. if you include repo name in front of every path, it would work */}
+            {/*the url in Logo and UserImg start with "/" so the way it works is that it joins behind http://localhost3000 (which is the domain name) and not current url http://localhost3000/disney-plus-clone */}
+            <Logo src='images/logo.svg' /> 
             <NavMenu>
                 <a>
-                    <img src="disney-plus-clone/images/home-icon.svg" alt="" />
+                    <img src="images/home-icon.svg" alt="" />{/*This urls don't start with "/" so they join behind current url http://localhost3000/disney-plus-clone */}
                     <span>Home</span>
                 </a>
                 <a>
@@ -39,12 +43,13 @@ export default function Header() {
                     alert("You have been logged out");
                     setLogin(!login)
                 }}>
-                    <img src="/images/mario-av.png" />
+                    <img src="images/mario-av.png" />
                 </UserImg> :
 
                 <LoginBtn onClick={() => {
-                    alert("You are now login as Mario");
                     setLogin(!login)
+                    navigate("/login")
+
                 }}>
                     Login
                 </LoginBtn>

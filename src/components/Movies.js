@@ -15,7 +15,7 @@ export default function Movies() {
                     return (
                         <Wrap key={movie.id}>
                             <Link to={`/detail/${movie.id}`}>
-                                <img src={movie.primaryImage ? movie.primaryImage.url : "./images/viewers-starwars.png"} />
+                                <img src={movie.primaryImage ? movie.primaryImage.url : "images/viewers-starwars.png"} />
                             </Link>
 
                         </Wrap>
